@@ -155,6 +155,7 @@ hex- CAB, dec- (12 x 16^2) + (10 x 16^1) + (10 x 16^0) = 3243, binary - 1100, 10
 MAC address controls device interaction
 48 bit 12 hexidecimal (6 octets)
 
+
 |OUI     |NIC     |
 |Vendor  |Device  |
 |02 42 90|c1 b4 8c|
@@ -173,6 +174,7 @@ IPV4 - series of 1s and 0s (binary numeral system)
 32 bit (4 octet)
 
 **IP classes**
+Classful addressing
 |       |Octet 1|Octet 2|Octet 3|Octet 4|
 |Class A|1-127  |0-255  |0-255  |0=255  |
 |Class B|128-191|0-255  |0-255  |0=255  |
@@ -187,6 +189,20 @@ Class C first octet starts with 110
 Class A - 2^24 available host IP addresses
 Class B - 2^16 available host IP addresses
 Class B - 2^8 avaiable host IP addresses
+
+Class A subnet mask - 255.0.0.0 /8, bpcast IP - 0nnn nnnn.255.255.255 (first octet is between 1-127)
+Reserved Private 10.0.0.0-10.255.255.255
+Loopback 127.0.0.0-127.255.255.255 - local host, don't assign this to anything
+
+Class B subnet mask - 255.255.0.0 /16, bpcast IP 10nn nnnn.nnnn nnnn.255.255 (first octet between 128-191 and second 0-255)
+Reserved private: 172.16.0.0-172.31.255.255
+
+Class C
+Net ID 192-223.0-255.0-255.0
+1st IP: 192-223.0-255.0-255.1
+Last IP: 192-223.0-255.0-255.254
+bcast IP: 192-223.0-225/0-255/255
+Subnet mask 255.255.255.0 /24
 
 **Subnet Mask**
 - 32 bit address
@@ -220,11 +236,15 @@ Network ID: 192.128.2.1
 
 **Broadcast ID (bcast IP)**
 - The last IP in the network
+- all hosts bits of the IP address are 1's
 - All host in a network should have the same Broadcast IP
 - Use the broadcast IP to send specific data to all the machines on the same network
 
+**Localhost- 127.0.0.1**
+The standard IP address used for a loopback network connection - looped back to your own machine (this computer)
+
 **Ping**
-- Ping is Internet Control Message Protocol (ICMP) packet.
+- Ping is Internet Control Message Protocol (ICMP) packet. -at layer 3 (Network)
 - Ping allows a user to ping another device IP address, this helps determine whether a device is reachable via the network.
 
 command prompt:
@@ -234,3 +254,82 @@ Returns:
 Reply from... : host has received the ping message back from the destination device within the designated time period
 Request timed out: host did not receive the ping message back from the destination device within designated time period
 Destination host unreachable: route to destination computer system cannot be found
+
+**Broadcast Domain**
+A broadcast domain is the region that broadcasts are received, broadcasts are restricted by routers(layer 3 devices)
+
+**ARP & RARP**
+Layer 2
+Address resolution protocol - maps an IP address to a permanent physical machine address in a local area network MAC
+Reverse address resolution protocol
+ARP and RARP translate between IP addresses and MAC layer addresses
+- They are broadcast protocols
+All hosts on a network are located by their IP address, but NICs (layer 2) do not have IP addresses, they have MAC addresses. ARP associated the IP address to a MAC address.
+
+**Default Gateway**
+
+The device that handles the traffic between different IP networks, usually the router interface.
+Hosts can only send traffic to the gateway if:
+- it's connected to its network physically
+- it's on the same subnet (usually)
+
+## Servers
+
+**DHCP**
+Dynamic Host Configuration Protocol - works on bc mode (mac address FFFF.FFFF.FFFF) - this uses UDP ports => application layer protocol
+Server/ client protocol
+- Automatically assigns IP hosts with IP addresses and other IP addresses of devices connected to the network (e.g default gateway)
+- Port numbers:
+	- 67/udp for DHCP server
+	- 68/udp for DHCP client 
+-  Eliminates need for individually configuring network devices manually.
+
+**HTTP**
+Hypertext Transfer Protocol - an application layer protocol for transmitting hypermedia documents (graphics, audio, plain text video)
+HTML - markup languge for documents designed to be displayed in a web browser
+HTTP runs over TCP
+TCP port 80
+HTTPS (secure)
+TCP port 443
+
+**FTP**
+File Transfer Protocol - application layer protocol used for the transfer of computer files from a server to a client on a computer network.
+TCP port 21 - used to establish the connection between 2 hosts
+TCP port 20 - used to transfer data 
+
+**DNS**
+Domain Name System - converts host names/ domain names into IP addresses, browsers uses these IPs to load internet pages.
+DNS is an application layer protocol that uses the transport layer protocol . Uses TCP for zone transfer and UDP for name.
+
+## Firewalls
+A network security system that monitors/ controls incoming and outgoing network traffic (between networks) - firewalls can be a device or a software.
+Access Control List (ACL) - set of rules or policy that grants/denies access to a resource, it filter access to a network.
+ACLs usually reside in a firewall router in a router that connects networks.
+
+**Properties of Firewalls**
+- Resistent to network attacks.
+- Have ACLs
+- Can be software installed on a host/ hardware, a computes that enforces ACLs.
+
+**Advantages**
+- Prevents hackers and remote access
+- Protects data
+- Protects privacy details
+- Can protect against Trojans - malware often disguised as legitimate software.
+
+**Disadvantages**
+- It can't always protect network from attacks from the inside.
+
+
+**Packet Filtering Firewall**
+Based on network, transport layers. Monitors outgoing and incoming packets and allowing them to pass or halt based on the source and destination IP address, protocols and ports (TCP/UDP ports)
+
+**Application Gateway Firewall**
+More capable than packet filtering firewall.
+Operates at the application layer (also checks presentation, session, transport, network layers). This means firewall can check software.
+
+**Firewall zones**
+Private(inside)
+Public(untrusted)
+DMZ - a perimeter network that protects the internal local-area network from untrusted traffic.
+- Allows you to access untrusted networks like the internet, whilst ensuring its private network remains secure.
