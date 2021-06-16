@@ -359,8 +359,8 @@ VPN aims to secure network traffic between sites and users.
 - A tunneling protocol used to support VPNs. L2PT uses encryption only for its own control messages and does not provide any encryption or confidentiality of content by itself.
  
 **IP Security (IPSec)**
-- A secure network protocol suite, authenticates and encrypts the packets of data to provide secure encrypted communication between two computes over an IP network
-Secure Sockets Layer (SSL)
+- A secure network protocol suite, authenticates and encrypts the packets of data to provide secure encrypted communication between two computes over an IP network.
+
 
 **Secure Socket Layer (SSL)**
 - An ecryption-based internet security protocol.
