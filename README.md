@@ -211,7 +211,7 @@ Subnet mask 255.255.255.0 /24
 - Every host on a TCP/IP network requires a subnet mask
 - In the subnet mask:
 	-Bits that correspond to the network ID are set to 1
-	-Bits that correspond to the network ID are set to 0
+	-Bits that correspond to the host ID are set to 0
 	- 1s on left, 0s on right
 
 e.g
@@ -333,3 +333,83 @@ Private(inside)
 Public(untrusted)
 DMZ - a perimeter network that protects the internal local-area network from untrusted traffic.
 - Allows you to access untrusted networks like the internet, whilst ensuring its private network remains secure.
+
+## Virtual Private Networks (VPN)
+
+VPN aims to secure network traffic between sites and users.
+- Users and organisations use VPNs to create end-toend private network connections
+- A vpn is virtual in that it carries info within a private network but that info is actually transported over a public network
+- The traffic is encrypted to keep the data confidential while it is transported
+
+### VPN Protocols
+
+
+**Point-to-Point Tunneling Protocol (PPTP)**
+- A set of communication rules that govern the secure implementation of VPNs which allow organisations a method of extending their own private networks over the public Internet via "tunnels"
+
+**Generic Route Encapsulation (GRE)**
+- A tunneling protocol that can enca[sulate a wide variety of network layer protocols inside virtual point-to-point links over an IP network
+
+**Layer 2 Tunneling Protocol (L2PT)**
+- A tunneling protocol used to support VPNs. L2PT uses encryption only for its own control messages and does not provide any encryption or confidentiality of content by itself.
+ 
+**IP Security (IPSec)**
+- A secure network protocol suite, authenticates and encrypts the packets of data to provide secure encrypted communication between two computes over an IP network
+Secure Sockets Layer (SSL)
+
+**Secure Socket Layer (SSL)**
+- An ecryption-based internet security protocol.
+
+### Host-to-Host VPN
+Connects one desktop to another host. This connection uses the network to which each host is connected to create a secure tunnel between the two.
+Connects hosts not networks
+Intercepter - router can only see scrambled data with VPN tunnel
+
+### Host-to-Site VPN
+VPN client software is on host itself
+
+vpn server: vpn gateway(vpn concentrator)router/ firewall
+Connection is from host to entire network => host can access all of network resources e.g webserver
+
+### Site-to-Site VPN
+A connection between two or more networks, e.g a coporate network and a branch office network
+- Creates an encrypted link between vpn gateways located at each of these sites
+- A site-to-site vpn tunnel encrypts traffic at one end and sends it to the other site over the public internet where it is decrypted and routed on to its destination
+
+## Network Address Translation (NAT)
+
+### IP address shortage
+- There are not enough public IPv4 addresses to assign a unique address to each device connected to the internet (whole world)
+- Private addresses are used within an organization or site to allow devices to communicate locally 
+- Private IPv4 addresses cannot be routed over the internet
+
+To allow a device with a private IPv4 address to access devices and resources outside of the local network, the private address must first be translated to a public address.
+NAT provides the translation of private addresses to public addresses - NAT router
+A single public IPv4 address can be shared by hundred, even thousands of devices (i.e private IP addresses)
+Assigned by network provider then depends on region (country, even sometimes what city).
+- My phone and laptop connected to my home router have the same public IP.
+
+NAT keeps a table containing details of the connections
+Inside Local IP, Inside Global IP, Outside Global IP
+
+### Types of NAT
+
+Static NAT: uses a one-to one mapping of local and global addresses. 
+- Useful when a network device inside a private network needs to be accessible from internet
+- If you don't give access to NAT to everbody, you can hide internal network
+- Inside local addresss always takes a specific inside global address (addresses reachable via NAT Router)
+
+Dynamic NAT: mapping of a private IP address to a public IP address from a group of public addresses called a NAT pool.
+- Establishes a one-to-one mapping between a private IP address to a public IP address - takes first available public address
+- Here public IP address is taken from the pool of IP addresses configured on the end NAT router.
+- Cannot translate 2 ip addresses to a public address.
+
+Port Address Translation NAT: can map multiple private IP addresse to a single public IP address by using a technology known as PAT
+- When a client from inside the network communicates to a host in the internet, the router changes the source port (TCP/ UDP) number with another port number.
+- The port mappings are also kept in a table which keep the port mapping and forward the data packet to the originial sender.
+- Adv: multiple internal hosts can share a single IP address for communication => conserving IP addresses
+- Adv: Hosts on private network dont have to expose their private IP address to the public network making attacks from the public network less likely
+- Disadv: if too many hosts on the private network try to make many connections to the public network PAT device may not have sufficient room in its internal table to keep track of the connections or it may run out of unused ports
+e.g router at home
+
+
