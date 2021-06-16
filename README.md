@@ -118,6 +118,7 @@ Bandwidth: maximum rate of data transfer accross a given path e.g bits per secon
 **2^n** - radix=2, position in number=n
 
 | Radix              | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   |
+|--------------------|-----|-----|-----|-----|-----|-----|-----|-----|
 | Position in number | 7   | 6   | 5   | 4   | 3   | 2   | 1   | 0   |
 | Calculate          | 2^7 | 2^6 | 2^5 | 2^4 | 2^3 | 2^2 | 2^1 | 2^0 |
 | Position value     | 128 | 64  | 32  | 16  | 8   | 4   | 2   | 1   |
@@ -132,6 +133,7 @@ Bandwidth: maximum rate of data transfer accross a given path e.g bits per secon
 ### Decimal Numeral System
 
 | Radix              | 10   | 10   | 10   | 10   |
+|--------------------|------|------|------|------|
 | Position in number | 4    | 2    | 1    | 0    |
 | Calculate          | 10^3 | 10^2 | 10^1 | 10^0 |
 | Position value     | 1000 | 100  | 10   | 1    |
@@ -144,6 +146,7 @@ Bandwidth: maximum rate of data transfer accross a given path e.g bits per secon
 **16^n** 
 
 | Hexidecimal | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    | A    | B    | C    | D    | E    | F    |
+|-------------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
 | Decimal     | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    | 10   | 11   | 12   | 13   | 14   | 15   |
 | Binary      | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1010 | 1011 | 1100 | 1101 | 1110 | 1111 |
 
@@ -157,6 +160,7 @@ MAC address controls device interaction
 
 
 |OUI     |NIC     |
+|--------|--------|
 |Vendor  |Device  |
 |02 42 90|c1 b4 8c|
 
@@ -176,6 +180,7 @@ IPV4 - series of 1s and 0s (binary numeral system)
 **IP classes**
 Classful addressing
 |       |Octet 1|Octet 2|Octet 3|Octet 4|
+|-------|-------|-------|-------|-------|
 |Class A|1-127  |0-255  |0-255  |0=255  |
 |Class B|128-191|0-255  |0-255  |0=255  |
 |Class C|192-223|0-255  |0-255  |0=255  |
